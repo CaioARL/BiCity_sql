@@ -93,7 +93,7 @@ CREATE TABLE `Evento` (
   `data_final` timestamp NOT NULL,
   `gratuito` boolean NOT NULL,
   `id_tipo_evento` BIGINT NOT NULL,
-  `id_localizacao` BIGINT NOT NULL,
+  `id_endereco` BIGINT NOT NULL,
   `id_usuario` BIGINT NOT NULL
 );
 
@@ -119,9 +119,9 @@ CREATE TABLE `Infraestrutura_Cicloviaria` (
 
 CREATE TABLE `Infraestrutura_Cicloviaria_Filho` (
   `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
+  `id_tipo_infraestrutura_cicloviaria` BIGINT NOT NULL,
   `id_infraestrutura_pai` BIGINT NOT NULL,
   `id_localizacao` BIGINT NOT NULL,
-  `id_tipo_infraestrutura_cicloviaria` BIGINT NOT NULL,
   `criado_em` timestamp DEFAULT (now())
 );
 
@@ -183,7 +183,7 @@ ALTER TABLE `WebService_Token` ADD FOREIGN KEY (`id_usuario`) REFERENCES `Usuari
 
 ALTER TABLE `Evento` ADD FOREIGN KEY (`id_tipo_evento`) REFERENCES `Tipo_Evento` (`id`);
 
-ALTER TABLE `Evento` ADD FOREIGN KEY (`id_localizacao`) REFERENCES `Localizacao` (`id`);
+ALTER TABLE `Evento` ADD FOREIGN KEY (`id_endereco`) REFERENCES `Endereco` (`id`);
 
 ALTER TABLE `Evento` ADD FOREIGN KEY (`id_usuario`) REFERENCES `Usuario` (`id`);
 
@@ -217,3 +217,6 @@ insert into `Perfil` (nome, descricao) values('INICIANTE', 'Ciclista iniciante')
 insert into `Perfil` (nome, descricao) values('INTERMEDIARIO', 'Ciclista intermediario');
 insert into `Perfil` (nome, descricao) values('AVANCADO', 'Ciclista avancado');
 insert into `Perfil` (nome, descricao) values('PROFISSIONAL', 'Ciclista profissional');
+
+insert into `Tipo_Localizacao` (nome, descricao) values('LineString', 'Localizacao em formato de linha');
+insert into `Tipo_Localizacao` (nome, descricao) values('Polygon', 'Localizacao em formato de poligono');
