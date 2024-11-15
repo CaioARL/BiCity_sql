@@ -46,6 +46,8 @@ CREATE TABLE `Endereco` (
   `cidade` varchar(255) NOT NULL,
   `estado` varchar(255) NOT NULL,
   `cep` varchar(255) NOT NULL,
+  `latitude` varchar(255) NOT NULL,
+  `longitude` varchar(255) NOT NULL,
   `criado_em` timestamp DEFAULT (now()),
   `atualizado_em` timestamp
 );
@@ -163,6 +165,15 @@ CREATE TABLE `Tipo_Localizacao` (
   `descricao` varchar(255) NOT NULL
 );
 
+CREATE TABLE `Configuracao_Api_Externa` (
+  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
+  `nome` varchar(255) UNIQUE NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `chave` varchar(255),
+  `criado_em` timestamp DEFAULT (now()),
+  `atualizado_em` timestamp
+);
+
 ALTER TABLE `Usuario` ADD FOREIGN KEY (`id_perfil`) REFERENCES `Perfil` (`id`);
 
 ALTER TABLE `Usuario` ADD FOREIGN KEY (`id_pessoa_fisica`) REFERENCES `Pessoa_Fisica` (`id`);
@@ -220,3 +231,5 @@ insert into `Perfil` (nome, descricao) values('PROFISSIONAL', 'Ciclista profissi
 
 insert into `Tipo_Localizacao` (nome, descricao) values('LineString', 'Localizacao em formato de linha');
 insert into `Tipo_Localizacao` (nome, descricao) values('Polygon', 'Localizacao em formato de poligono');
+
+insert into `Configuracao_Api_Externa` (nome, url) values('BRASIL_API', 'https://brasilapi.com.br/api');

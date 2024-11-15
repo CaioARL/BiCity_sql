@@ -46,6 +46,8 @@ Table Endereco {
     cidade varchar(255) [not null]
     estado varchar(255) [not null]
     cep varchar(255) [not null]
+    latitude varchar(255) [not null]
+    longitude varchar(255) [not null]
     criado_em timestamp [default: `now()`]
     atualizado_em timestamp
 }
@@ -109,7 +111,7 @@ Table Tipo_Evento {
 Table Avaliacao {
     id BIGINT [pk, increment]
     criado_em timestamp [default: `now()`]
-    nota int [not null]
+    nota float [not null, default: 0]
     id_usuario BIGINT [not null, ref: > Usuario.id]
     id_infraestrutura_cicloviaria BIGINT [not null, ref: > Infraestrutura_Cicloviaria.id]
 }
@@ -168,4 +170,14 @@ Table Tipo_Localizacao {
     id BIGINT [pk, increment]
     nome varchar(255) [not null]
     descricao varchar(255) [not null]
+}
+
+// Configuracaoes de apis externas
+Table Configuracao_Api {
+    id BIGINT [pk, increment]
+    nome varchar(255) [not null, unique]
+    url varchar(255) [not null]
+    chave varchar(255)
+    criado_em timestamp [default: `now()`]
+    atualizado_em timestamp
 }
