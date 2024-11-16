@@ -40,7 +40,7 @@ CREATE TABLE `Pessoa_Juridica` (
 CREATE TABLE `Endereco` (
   `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
   `rua` varchar(255) NOT NULL,
-  `numero` varchar(255) NOT NULL,
+  `numero` BIGINT NOT NULL,
   `complemento` varchar(255),
   `bairro` varchar(255) NOT NULL,
   `cidade` varchar(255) NOT NULL,

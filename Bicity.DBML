@@ -40,7 +40,7 @@ Table Pessoa_Juridica {
 Table Endereco {
     id BIGINT [pk, increment]
     rua varchar(255) [not null]
-    numero varchar(255) [not null]
+    numero BIGINT [not null]
     complemento varchar(255)
     bairro varchar(255) [not null]
     cidade varchar(255) [not null]
