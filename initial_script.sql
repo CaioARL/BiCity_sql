@@ -1,235 +1,237 @@
-USE `BiCity`;
+create database `bicity`;
 
-CREATE TABLE `Usuario` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `nome_usuario` varchar(255) UNIQUE NOT NULL,
-  `criado_em` timestamp DEFAULT (now()),
-  `id_perfil` BIGINT,
-  `id_pessoa_fisica` BIGINT,
-  `id_pessoa_juridica` BIGINT,
-  `id_endereco` BIGINT,
-  `id_email` BIGINT,
-  `id_senha` BIGINT NOT NULL,
-  `id_tipo_usuario` BIGINT NOT NULL
+use `bicity`;
+
+create table `usuario` (
+  `id` bigint primary key auto_increment,
+  `nome_usuario` varchar(255) unique not null,
+  `criado_em` timestamp default (now()),
+  `id_perfil` bigint,
+  `id_pessoa_fisica` bigint,
+  `id_pessoa_juridica` bigint,
+  `id_endereco` bigint,
+  `id_email` bigint,
+  `id_senha` bigint not null,
+  `id_tipo_usuario` bigint not null
 );
 
-CREATE TABLE `Tipo_Usuario` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `nome` varchar(255) NOT NULL,
-  `descricao` varchar(255) NOT NULL
+create table `tipo_usuario` (
+  `id` bigint primary key auto_increment,
+  `nome` varchar(255) not null,
+  `descricao` varchar(255) not null
 );
 
-CREATE TABLE `Perfil` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `nome` varchar(255) NOT NULL,
-  `descricao` varchar(255) NOT NULL
+create table `perfil` (
+  `id` bigint primary key auto_increment,
+  `nome` varchar(255) not null,
+  `descricao` varchar(255) not null
 );
 
-CREATE TABLE `Pessoa_Fisica` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `nome` varchar(255) NOT NULL,
-  `cpf` varchar(255) NOT NULL
+create table `pessoa_fisica` (
+  `id` bigint primary key auto_increment,
+  `nome` varchar(255) not null,
+  `cpf` varchar(255) not null
 );
 
-CREATE TABLE `Pessoa_Juridica` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `nome` varchar(255) NOT NULL,
-  `cnpj` varchar(255) NOT NULL
+create table `pessoa_juridica` (
+  `id` bigint primary key auto_increment,
+  `nome` varchar(255) not null,
+  `cnpj` varchar(255) not null
 );
 
-CREATE TABLE `Endereco` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `rua` varchar(255) NOT NULL,
-  `numero` BIGINT NOT NULL,
+create table `endereco` (
+  `id` bigint primary key auto_increment,
+  `rua` varchar(255) not null,
+  `numero` bigint not null,
   `complemento` varchar(255),
-  `bairro` varchar(255) NOT NULL,
-  `cidade` varchar(255) NOT NULL,
-  `estado` varchar(255) NOT NULL,
-  `cep` varchar(255) NOT NULL,
-  `latitude` varchar(255) NOT NULL,
-  `longitude` varchar(255) NOT NULL,
-  `criado_em` timestamp DEFAULT (now()),
+  `bairro` varchar(255) not null,
+  `cidade` varchar(255) not null,
+  `estado` varchar(255) not null,
+  `cep` varchar(255) not null,
+  `latitude` varchar(255) not null,
+  `longitude` varchar(255) not null,
+  `criado_em` timestamp default (now()),
   `atualizado_em` timestamp
 );
 
-CREATE TABLE `Email` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `valor` varchar(255) NOT NULL,
-  `criado_em` timestamp DEFAULT (now()),
+create table `email` (
+  `id` bigint primary key auto_increment,
+  `valor` varchar(255) not null,
+  `criado_em` timestamp default (now()),
   `atualizado_em` timestamp,
-  `validado` boolean NOT NULL
+  `validado` boolean not null
 );
 
-CREATE TABLE `Senha` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `valor` varchar(255) NOT NULL,
-  `chave` varchar(255) NOT NULL,
-  `criado_em` timestamp DEFAULT (now()),
+create table `senha` (
+  `id` bigint primary key auto_increment,
+  `valor` varchar(255) not null,
+  `chave` varchar(255) not null,
+  `criado_em` timestamp default (now()),
   `atualizado_em` timestamp
 );
 
-CREATE TABLE `Auth_Token` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `token` varchar(255) UNIQUE NOT NULL,
-  `criado_em` timestamp DEFAULT (now()),
-  `expira_em` timestamp NOT NULL,
-  `id_usuario` BIGINT NOT NULL
+create table `auth_token` (
+  `id` bigint primary key auto_increment,
+  `token` varchar(255) unique not null,
+  `criado_em` timestamp default (now()),
+  `expira_em` timestamp not null,
+  `id_usuario` bigint not null
 );
 
-CREATE TABLE `WebService_Token` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `token` varchar(255) UNIQUE NOT NULL,
-  `criado_em` timestamp DEFAULT (now()),
+create table `webservice_token` (
+  `id` bigint primary key auto_increment,
+  `token` varchar(255) unique not null,
+  `criado_em` timestamp default (now()),
   `expira_em` timestamp,
-  `ativo` boolean NOT NULL,
-  `id_usuario` BIGINT NOT NULL
+  `ativo` boolean not null,
+  `id_usuario` bigint not null
 );
 
-CREATE TABLE `Evento` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `nome` varchar(255) NOT NULL,
-  `descricao` varchar(255) NOT NULL,
-  `criado_em` timestamp DEFAULT (now()),
+create table `evento` (
+  `id` bigint primary key auto_increment,
+  `nome` varchar(255) not null,
+  `descricao` varchar(255) not null,
+  `criado_em` timestamp default (now()),
   `atualizado_em` timestamp,
-  `data_inicial` timestamp NOT NULL,
-  `data_final` timestamp NOT NULL,
-  `gratuito` boolean NOT NULL,
-  `id_tipo_evento` BIGINT NOT NULL,
-  `id_endereco` BIGINT NOT NULL,
-  `id_usuario` BIGINT NOT NULL
+  `data_inicial` timestamp not null,
+  `data_final` timestamp not null,
+  `gratuito` boolean not null,
+  `id_tipo_evento` bigint not null,
+  `id_endereco` bigint not null,
+  `id_usuario` bigint not null
 );
 
-CREATE TABLE `Tipo_Evento` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `nome` varchar(255) NOT NULL,
-  `descricao` varchar(255) NOT NULL
+create table `tipo_evento` (
+  `id` bigint primary key auto_increment,
+  `nome` varchar(255) not null,
+  `descricao` varchar(255) not null
 );
 
-CREATE TABLE `Avaliacao` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `criado_em` timestamp DEFAULT (now()),
-  `nota` float NOT NULL DEFAULT 0,
-  `id_usuario` BIGINT NOT NULL,
-  `id_infraestrutura_cicloviaria` BIGINT NOT NULL
+create table `avaliacao` (
+  `id` bigint primary key auto_increment,
+  `criado_em` timestamp default (now()),
+  `nota` float not null default 0,
+  `id_usuario` bigint not null,
+  `id_infraestrutura_cicloviaria` bigint not null
 );
 
-CREATE TABLE `Infraestrutura_Cicloviaria` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `nota_media` int NOT NULL,
-  `criado_em` timestamp DEFAULT (now())
+create table `infraestrutura_cicloviaria` (
+  `id` bigint primary key auto_increment,
+  `nota_media` int not null,
+  `criado_em` timestamp default (now())
 );
 
-CREATE TABLE `Infraestrutura_Cicloviaria_Filho` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `id_tipo_infraestrutura_cicloviaria` BIGINT NOT NULL,
-  `id_infraestrutura_pai` BIGINT NOT NULL,
-  `id_localizacao` BIGINT NOT NULL,
-  `criado_em` timestamp DEFAULT (now())
+create table `infraestrutura_cicloviaria_filho` (
+  `id` bigint primary key auto_increment,
+  `id_tipo_infraestrutura_cicloviaria` bigint not null,
+  `id_infraestrutura_pai` bigint not null,
+  `id_localizacao` bigint not null,
+  `criado_em` timestamp default (now())
 );
 
-CREATE TABLE `Tipo_Infraestrutura_Cicloviaria` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `nome` varchar(255) NOT NULL,
-  `descricao` varchar(255) NOT NULL
+create table `tipo_infraestrutura_cicloviaria` (
+  `id` bigint primary key auto_increment,
+  `nome` varchar(255) not null,
+  `descricao` varchar(255) not null
 );
 
-CREATE TABLE `Problema` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `descricao` varchar(255) NOT NULL,
-  `foto` BLOB,
-  `criado_em` timestamp DEFAULT (now()),
-  `ativo` boolean NOT NULL,
-  `id_tipo_problema` BIGINT NOT NULL,
-  `id_infraestrutura_cicloviaria` BIGINT NOT NULL
+create table `problema` (
+  `id` bigint primary key auto_increment,
+  `descricao` varchar(255) not null,
+  `foto` blob,
+  `criado_em` timestamp default (now()),
+  `ativo` boolean not null,
+  `id_tipo_problema` bigint not null,
+  `id_infraestrutura_cicloviaria` bigint not null
 );
 
-CREATE TABLE `Tipo_Problema` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `nome` varchar(255) NOT NULL,
-  `descricao` varchar(255) NOT NULL
+create table `tipo_problema` (
+  `id` bigint primary key auto_increment,
+  `nome` varchar(255) not null,
+  `descricao` varchar(255) not null
 );
 
-CREATE TABLE `Localizacao` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `latitude` varchar(255) NOT NULL,
-  `longitude` varchar(255) NOT NULL,
-  `cep` varchar(255) NOT NULL,
-  `criado_em` timestamp DEFAULT (now()),
+create table `localizacao` (
+  `id` bigint primary key auto_increment,
+  `latitude` varchar(255) not null,
+  `longitude` varchar(255) not null,
+  `cep` varchar(255) not null,
+  `criado_em` timestamp default (now()),
   `atualizado_em` timestamp,
-  `id_tipo_localizacao` BIGINT NOT NULL
+  `id_tipo_localizacao` bigint not null
 );
 
-CREATE TABLE `Tipo_Localizacao` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `nome` varchar(255) NOT NULL,
-  `descricao` varchar(255) NOT NULL
+create table `tipo_localizacao` (
+  `id` bigint primary key auto_increment,
+  `nome` varchar(255) not null,
+  `descricao` varchar(255) not null
 );
 
-CREATE TABLE `Configuracao_Api_Externa` (
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `nome` varchar(255) UNIQUE NOT NULL,
-  `url` varchar(255) NOT NULL,
+create table `configuracao_api_externa` (
+  `id` bigint primary key auto_increment,
+  `nome` varchar(255) unique not null,
+  `url` varchar(255) not null,
   `chave` varchar(255),
-  `criado_em` timestamp DEFAULT (now()),
+  `criado_em` timestamp default (now()),
   `atualizado_em` timestamp
 );
 
-ALTER TABLE `Usuario` ADD FOREIGN KEY (`id_perfil`) REFERENCES `Perfil` (`id`);
+alter table `usuario` add foreign key (`id_perfil`) references `perfil` (`id`);
 
-ALTER TABLE `Usuario` ADD FOREIGN KEY (`id_pessoa_fisica`) REFERENCES `Pessoa_Fisica` (`id`);
+alter table `usuario` add foreign key (`id_pessoa_fisica`) references `pessoa_fisica` (`id`);
 
-ALTER TABLE `Usuario` ADD FOREIGN KEY (`id_pessoa_juridica`) REFERENCES `Pessoa_Juridica` (`id`);
+alter table `usuario` add foreign key (`id_pessoa_juridica`) references `pessoa_juridica` (`id`);
 
-ALTER TABLE `Usuario` ADD FOREIGN KEY (`id_endereco`) REFERENCES `Endereco` (`id`);
+alter table `usuario` add foreign key (`id_endereco`) references `endereco` (`id`);
 
-ALTER TABLE `Usuario` ADD FOREIGN KEY (`id_email`) REFERENCES `Email` (`id`);
+alter table `usuario` add foreign key (`id_email`) references `email` (`id`);
 
-ALTER TABLE `Usuario` ADD FOREIGN KEY (`id_senha`) REFERENCES `Senha` (`id`);
+alter table `usuario` add foreign key (`id_senha`) references `senha` (`id`);
 
-ALTER TABLE `Usuario` ADD FOREIGN KEY (`id_tipo_usuario`) REFERENCES `Tipo_Usuario` (`id`);
+alter table `usuario` add foreign key (`id_tipo_usuario`) references `tipo_usuario` (`id`);
 
-ALTER TABLE `Auth_Token` ADD FOREIGN KEY (`id_usuario`) REFERENCES `Usuario` (`id`);
+alter table `auth_token` add foreign key (`id_usuario`) references `usuario` (`id`);
 
-ALTER TABLE `WebService_Token` ADD FOREIGN KEY (`id_usuario`) REFERENCES `Usuario` (`id`);
+alter table `webservice_token` add foreign key (`id_usuario`) references `usuario` (`id`);
 
-ALTER TABLE `Evento` ADD FOREIGN KEY (`id_tipo_evento`) REFERENCES `Tipo_Evento` (`id`);
+alter table `evento` add foreign key (`id_tipo_evento`) references `tipo_evento` (`id`);
 
-ALTER TABLE `Evento` ADD FOREIGN KEY (`id_endereco`) REFERENCES `Endereco` (`id`);
+alter table `evento` add foreign key (`id_endereco`) references `endereco` (`id`);
 
-ALTER TABLE `Evento` ADD FOREIGN KEY (`id_usuario`) REFERENCES `Usuario` (`id`);
+alter table `evento` add foreign key (`id_usuario`) references `usuario` (`id`);
 
-ALTER TABLE `Avaliacao` ADD FOREIGN KEY (`id_usuario`) REFERENCES `Usuario` (`id`);
+alter table `avaliacao` add foreign key (`id_usuario`) references `usuario` (`id`);
 
-ALTER TABLE `Avaliacao` ADD FOREIGN KEY (`id_infraestrutura_cicloviaria`) REFERENCES `Infraestrutura_Cicloviaria` (`id`);
+alter table `avaliacao` add foreign key (`id_infraestrutura_cicloviaria`) references `infraestrutura_cicloviaria` (`id`);
 
-ALTER TABLE `Infraestrutura_Cicloviaria_Filho` ADD FOREIGN KEY (`id_tipo_infraestrutura_cicloviaria`) REFERENCES `Tipo_Infraestrutura_Cicloviaria` (`id`);
+alter table `infraestrutura_cicloviaria_filho` add foreign key (`id_tipo_infraestrutura_cicloviaria`) references `tipo_infraestrutura_cicloviaria` (`id`);
 
-ALTER TABLE `Infraestrutura_Cicloviaria_Filho` ADD FOREIGN KEY (`id_infraestrutura_pai`) REFERENCES `Infraestrutura_Cicloviaria` (`id`);
+alter table `infraestrutura_cicloviaria_filho` add foreign key (`id_infraestrutura_pai`) references `infraestrutura_cicloviaria` (`id`);
 
-ALTER TABLE `Infraestrutura_Cicloviaria_Filho` ADD FOREIGN KEY (`id_localizacao`) REFERENCES `Localizacao` (`id`);
+alter table `infraestrutura_cicloviaria_filho` add foreign key (`id_localizacao`) references `localizacao` (`id`);
 
-ALTER TABLE `Problema` ADD FOREIGN KEY (`id_tipo_problema`) REFERENCES `Tipo_Problema` (`id`);
+alter table `problema` add foreign key (`id_tipo_problema`) references `tipo_problema` (`id`);
 
-ALTER TABLE `Problema` ADD FOREIGN KEY (`id_infraestrutura_cicloviaria`) REFERENCES `Infraestrutura_Cicloviaria` (`id`);
+alter table `problema` add foreign key (`id_infraestrutura_cicloviaria`) references `infraestrutura_cicloviaria` (`id`);
 
-ALTER TABLE `Localizacao` ADD FOREIGN KEY (`id_tipo_localizacao`) REFERENCES `Tipo_Localizacao` (`id`);
+alter table `localizacao` add foreign key (`id_tipo_localizacao`) references `tipo_localizacao` (`id`);
 
--- Inserts basicos
-insert into `Tipo_Usuario` (nome, descricao) values('ADM', 'Administrador do sistema');
-insert into `Tipo_Usuario` (nome, descricao) values('COMUM', 'Usuário Comum do sitema');
+-- inserts basicos
+insert into `tipo_usuario` (nome, descricao) values('adm', 'administrador do sistema');
+insert into `tipo_usuario` (nome, descricao) values('comum', 'usuário comum do sitema');
 
-insert into `Senha` (valor, chave) values('zU4imsbP44oT6iHX0pN+YRrRvuYVQaui93pxTndu9a6k', 'MMO64F5vxlLNRqw5pL42zLkEoYF5V5YBcN33GLpEcME=');
+insert into `senha` (valor, chave) values('zU4imsbP44oT6iHX0pN+YRrRvuYVQaui93pxTndu9a6k', 'MMO64F5vxlLNRqw5pL42zLkEoYF5V5YBcN33GLpEcME=');
 
-insert into `Usuario` (nome_usuario, id_senha, id_tipo_usuario) values('adm', 1, 1);
+insert into `usuario` (nome_usuario, id_senha, id_tipo_usuario) values('adm', 1, 1);
 
-insert into `WebService_Token` (token, ativo, id_usuario) values('cCiTBU66i9l8EWrIVEHf', 1, 1);
+insert into `webservice_token` (token, ativo, id_usuario) values('cCiTBU66i9l8EWrIVEHf', 1, 1);
 
-insert into `Perfil` (nome, descricao) values('INICIANTE', 'Ciclista iniciante');
-insert into `Perfil` (nome, descricao) values('INTERMEDIARIO', 'Ciclista intermediario');
-insert into `Perfil` (nome, descricao) values('AVANCADO', 'Ciclista avancado');
-insert into `Perfil` (nome, descricao) values('PROFISSIONAL', 'Ciclista profissional');
+insert into `perfil` (nome, descricao) values('INICIANTE', 'Ciclista iniciante');
+insert into `perfil` (nome, descricao) values('INTERMEDIARIO', 'Ciclista intermediario');
+insert into `perfil` (nome, descricao) values('AVANCADO', 'Ciclista avancado');
+insert into `perfil` (nome, descricao) values('PROFISSIONAL', 'Ciclista profissional');
 
-insert into `Tipo_Localizacao` (nome, descricao) values('LineString', 'Localizacao em formato de linha');
-insert into `Tipo_Localizacao` (nome, descricao) values('Polygon', 'Localizacao em formato de poligono');
+insert into `tipo_localizacao` (nome, descricao) values('LineString', 'Localizacao em formato de linha');
+insert into `tipo_localizacao` (nome, descricao) values('Polygon', 'Localizacao em formato de poligono');
 
-insert into `Configuracao_Api_Externa` (nome, url) values('BRASIL_API', 'https://brasilapi.com.br/api');
+insert into `configuracao_api_externa` (nome, url) values('BRASIL_API', 'https://brasilapi.com.br/api');
