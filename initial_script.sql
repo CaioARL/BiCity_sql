@@ -49,15 +49,15 @@ create table `evento` (
   `dt_atualizacao` timestamp,
   `data` timestamp not null,
   `endereco` varchar(255) not null,
-  `id_tipo_evento` bigint not null,
-  `id_nivel_habilidade` bigint not null
+  `id_tipo_evento` bigint not null
 );
 
 create table `tipo_evento` (
   `id` bigint primary key auto_increment,
   `nome` varchar(255) not null,
   `faixa_km` varchar(255) not null,
-  `gratuito` boolean not null
+  `gratuito` boolean not null,
+  `id_nivel_habilidade` bigint not null
 );
 
 create table `avaliacao_infraestrutura_cicloviaria` (
@@ -109,7 +109,7 @@ create table `problema` (
 alter table `usuario` add constraint `fk_nivel_habilidade` foreign key (`id_nivel_habilidade`) references `nivel_habilidade` (`id`);
 alter table `token` add constraint `fk_usuario` foreign key (`id_usuario`) references `usuario` (`id`);
 alter table `evento` add constraint `fk_tipo_evento` foreign key (`id_tipo_evento`) references `tipo_evento` (`id`);
-alter table `evento` add constraint `fk_nivel_habilidade_evento` foreign key (`id_nivel_habilidade`) references `nivel_habilidade` (`id`);
+alter table `tipo_evento` add constraint `fk_nivel_habilidade_tipo_evento` foreign key (`id_nivel_habilidade`) references `nivel_habilidade` (`id`);
 alter table `avaliacao_infraestrutura_cicloviaria` add constraint `fk_usuario_avaliacao` foreign key (`id_usuario`) references `usuario` (`id`);
 alter table `avaliacao_infraestrutura_cicloviaria` add constraint `fk_infraestrutura_avaliacao` foreign key (`id_infraestrutura_cicloviaria`) references `infraestrutura_cicloviaria` (`id`);
 alter table `infraestrutura_cicloviaria` add constraint `fk_tipo_infraestrutura_cicloviaria` foreign key (`id_tipo_infraestrutura_cicloviaria`) references `tipo_infraestrutura_cicloviaria` (`id`);
