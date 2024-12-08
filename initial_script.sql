@@ -38,6 +38,7 @@ create table `nivel_habilidade` (
 create table `token` (
   `id` bigint primary key auto_increment,
   `valor` varchar(255) unique not null,
+  `dt_criacao` timestamp default (now()),
   `dt_expiracao` timestamp not null,
   `id_usuario` bigint not null
 );
@@ -46,8 +47,8 @@ create table `evento` (
   `id` bigint primary key auto_increment,
   `nome` varchar(255) not null,
   `descricao` varchar(255) not null,
-  `dt_atualizacao` timestamp,
   `data` timestamp not null,
+  `dt_atualizacao` timestamp,
   `endereco` varchar(255) not null,
   `id_tipo_evento` bigint not null
 );
@@ -118,3 +119,5 @@ alter table `trecho` add constraint `fk_infraestrutura_cicloviaria` foreign key 
 -- inserts basicos
 insert into `web_service_token` (valor) values('cCiTBU66i9l8EWrIVEHf');
 insert into `configuracao_api_externa` (nome, url) values('BRASIL_API', 'https://brasilapi.com.br/api');
+insert into `configuracao_api_externa` (nome, url) values('OPEN_STREET_MAP_API', 'https://nominatim.openstreetmap.org/search.php');
+insert into  `nivel_habilidade` (nome, descricao) values('INICIANTE', 'Ciclista iniciante');
