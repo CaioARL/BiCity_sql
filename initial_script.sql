@@ -121,3 +121,4 @@ insert into `web_service_token` (valor) values('cCiTBU66i9l8EWrIVEHf');
 insert into `configuracao_api_externa` (nome, url) values('BRASIL_API', 'https://brasilapi.com.br/api');
 insert into `configuracao_api_externa` (nome, url) values('OPEN_STREET_MAP_API', 'https://nominatim.openstreetmap.org/search.php');
 insert into  `nivel_habilidade` (nome, descricao) values('INICIANTE', 'Ciclista iniciante');
+insert into `tipo_evento` (nome, faixa_km, gratuito, id_nivel_habilidade) values('teste', 20, true, 1);
