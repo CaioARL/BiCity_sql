@@ -40,7 +40,7 @@ create table `token` (
   `valor` varchar(255) unique not null,
   `dt_criacao` timestamp default (now()),
   `dt_expiracao` timestamp not null,
-  `id_usuario` bigint not null
+  `email` varchar(255) not null
 );
 
 create table `evento` (
@@ -102,7 +102,6 @@ create table `problema` (
 
 -- Constraints
 alter table `usuario` add constraint `fk_nivel_habilidade` foreign key (`id_nivel_habilidade`) references `nivel_habilidade` (`id`);
-alter table `token` add constraint `fk_usuario` foreign key (`id_usuario`) references `usuario` (`id`);
 alter table `evento` add constraint `fk_tipo_evento` foreign key (`id_tipo_evento`) references `tipo_evento` (`id`);
 alter table `tipo_evento` add constraint `fk_nivel_habilidade_tipo_evento` foreign key (`id_nivel_habilidade`) references `nivel_habilidade` (`id`);
 alter table `avaliacao_infraestrutura_cicloviaria` add constraint `fk_usuario_avaliacao` foreign key (`id_usuario`) references `usuario` (`id`);
