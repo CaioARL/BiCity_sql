@@ -71,7 +71,8 @@ create table `avaliacao_infraestrutura_cicloviaria` (
 
 create table `infraestrutura_cicloviaria` (
   `id` bigint primary key auto_increment,
-  `nome` varchar(255) not null, 
+  `json_id` varchar(255) not null,
+  `nome_localidade` varchar(255),
   `nota_media` int not null,
   `geometria` varchar(255) not null,
   `id_tipo_infraestrutura_cicloviaria` bigint not null
@@ -85,7 +86,6 @@ create table `tipo_infraestrutura_cicloviaria` (
 
 create table `trecho` (
   `id` bigint primary key auto_increment,
-  `nome` varchar(255) not null,
   `latitude` varchar(255) not null,
   `longitude` varchar(255) not null,
   `id_infraestrutura_cicloviaria` bigint not null
@@ -116,8 +116,3 @@ insert into `configuracao_api_externa` (nome, url) values
 ('OPEN_STREET_MAP_API', 'https://nominatim.openstreetmap.org/search.php');
 insert into  `nivel_habilidade` (nome, descricao) values('INICIANTE', 'Ciclista iniciante');
 insert into `tipo_evento` (nome, faixa_km, gratuito, id_nivel_habilidade) values('teste', 20, true, 1);
-insert into tipo_infraestrutura_cicloviaria (nome, descricao) values
- ('Ciclorrota', 'Trajeto sinalizado em vias compartilhadas para ciclistas, sem exclusividade ou segregação.'),
- ('Ciclofaixa', 'Faixa destinada às bicicletas, demarcada por sinalização no leito das vias urbanas, sem separação física.'),
- ('Ciclovia', 'Via exclusiva e segregada para uso de bicicletas, separada do tráfego de veículos e pedestres.'),
- ('Calçada compartilhada', 'Área destinada ao uso conjunto de pedestres, ciclistas e veículos, com prioridade geralmente definida por normas locais.')
